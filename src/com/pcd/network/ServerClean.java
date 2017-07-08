@@ -44,65 +44,22 @@ public class ServerClean {
 		Thread t = new Thread( new Runnable (){
 			@Override
 			public void run(){ 
-				//@@@@@@@@@@@@@@ chat
 				
+				//@@@@@@@@@@@@@@ chat				
 				System.out.println("Thread execution start");
 				Reader br = null;
 				
 				while(true){
 					try{
 						
-						/*
-						br = new InputStreamReader(client.getInputStream());
-						
-						String thisLine;
-						br.read();
-						*/
-						
-						//System.out.println("ready to read");
-						//System.out.println("."+br.readLine());
 						ObjectInputStream objStream = new ObjectInputStream (client.getInputStream());
-						//objStream.readObject();
-						
 						Holder holder = (Holder) objStream.readObject();
-						
 						procesarEventoRecibido(id, holder);
-						//client.getInputStream().read());
-						
-						
-						/*
-						if(br.read()!=-1)
-							System.out.println(""+br.read());
-						/*
-						while ((thisLine = br.readLine()) != null) { // while loop begins here
-							
-							//System.out.println(thisLine);
-							System.out.println("Cliente " + id + ": "+thisLine);
-				       
-				       	}
-				       	*/
-						
-						
-						//String linea = br.readLine();
 					}catch(Exception ex){
 						ex.printStackTrace();
 						return;
 					}
-					/*
-					final DataInputStream os =  new DataInputStream(clientSocket.getInputStream());
-					
-					System.out.print(".");
-					try{
-						System.out.println("Mensaje desde servidor: ");
-						out("byte :"+os.readByte());
-						out("bytes left :"+os.available());
-					}catch(EOFException eofex){
-						//out("Stream finished");
-						//return;
-					}catch(Exception exex){
-						
-					}
-					*/
+
 				}
 				//@@@@@@@@@@@@@@@@@@@@@@
 			}

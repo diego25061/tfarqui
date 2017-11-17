@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 
 public class EntidadControlable extends Entidad implements KeyListener, MouseMotionListener, MouseListener{
 
+	public boolean movibleActivado = false;
 	public EntidadControlable() {
 		super();
 		ControladorEntidades.getInstance().agregarControlable(this);

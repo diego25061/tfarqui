@@ -12,10 +12,10 @@ public class Vec {
 	}
 	
 	public Vec(Vec vectorACopiar){
-		this.setComponentes(vectorACopiar.x(), vectorACopiar.y());
+		this.set(vectorACopiar.x(), vectorACopiar.y());
 	}
 	
-	public void setComponentes(float compX, float compY){
+	public void set(float compX, float compY){
 		this.compX=compX;
 		this.compY=compY;
 		anguloR=(float) Math.atan2( compY,  compX);
@@ -24,23 +24,23 @@ public class Vec {
 	}
 	
 	public void setX(float x){
-		setComponentes(x,compY);
+		set(x,compY);
 	}
 	
 	public void setY(float y){
-		setComponentes(compX,y);
+		set(compX,y);
 	}
 	
 	public void addX(float x){
-		setComponentes(compX+x,compY);		
+		set(compX+x,compY);		
 	}
 	
 	public void addY(float y){
-		setComponentes(compX,y+compY);
+		set(compX,y+compY);
 	}
 	
 	public Vec( float x , float y){
-		this.setComponentes(x, y);
+		this.set(x, y);
 	}
 	
 	public void sumar(float x , float y){
@@ -94,8 +94,32 @@ public class Vec {
 		//compY=modulo*(float)Math.sin(anguloRads);
 	}
 	
+	public Vec menos(Vec vec) {
+		return new Vec(x()-vec.x(), y() - vec.y());
+	}
+	
+	public void setCero() {
+		setX(0);
+		setY(0);
+	}
 	/*
 	public float getAnguloConVector(Vector v){
 	}
 	*/
+	
+	public float dist(Vec vector){
+		return menos(vector).getModulo();
+	}
+
+	
+	public void setAngulo(Vec desde, Vec hasta){
+		setAnguloGrados(hasta.menos(desde).getAnguloGrados());
+	}
+	
+	@Override
+	public String toString() {
+		return "Vec [anguloR=" + anguloR + ", modulo=" + modulo + ", X ="
+				+ compX + ", Y =" + compY + "]";
+	}
+	
 }

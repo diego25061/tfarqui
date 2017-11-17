@@ -1,19 +1,19 @@
 package com.pcd;
-import grf.dr.core.ControladorEntidades;
-import grf.dr.core.MotorGrafico;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 
 import com.pcd.entity.Contador;
 import com.pcd.entity.Mapa;
-import com.pcd.network.ClientClean;
+
+import grf.dr.core.ControladorEntidades;
+import grf.dr.core.MotorGrafico;
 
 
 public class Main {
@@ -48,25 +48,57 @@ public class Main {
 	 */
 	private void initialize() {
 		
-		ClientClean.inicializarCliente();
+		//ClientClean.inicializarCliente();
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 900, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//ControladorEntidades cont  = new ControladorEntidades();
+		frame.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+				ControladorEntidades.getInstance().mouseReleased(e);
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				ControladorEntidades.getInstance().mousePressed(e);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				ControladorEntidades.getInstance().mouseExited(e);
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				ControladorEntidades.getInstance().mouseEntered(e);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				ControladorEntidades.getInstance().mouseClicked(e);
+				
+			}
+		});
+		
 		frame.addMouseMotionListener(new MouseMotionListener() {
 			
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				ControladorEntidades.getInstance().mouseMoved(e);
 			}
 			
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				ControladorEntidades.getInstance().mouseDragged(e);
 			}
 		});
 		
@@ -75,7 +107,6 @@ public class Main {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				ControladorEntidades.getInstance().keyTyped(e);
-				
 			}
 			
 			@Override

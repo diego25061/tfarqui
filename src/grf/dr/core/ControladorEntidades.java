@@ -14,7 +14,7 @@ public class ControladorEntidades implements KeyListener, MouseMotionListener, M
 	private ArrayList<EntidadControlable> entidades;
 	private static ControladorEntidades instance;
 
-	boolean [] pressed;
+	boolean [][] pressed;
 	
 	public static ControladorEntidades getInstance(){
 		if(instance==null)
@@ -24,7 +24,7 @@ public class ControladorEntidades implements KeyListener, MouseMotionListener, M
 	
 	private ControladorEntidades() {
 		entidades = new ArrayList<EntidadControlable>();
-		pressed = new boolean[65536];
+		pressed = new boolean[200][300];
 	}
 	
 	public void agregarControlable(EntidadControlable ent){
@@ -34,23 +34,39 @@ public class ControladorEntidades implements KeyListener, MouseMotionListener, M
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		for(int i = 0 ;i< entidades.size();i++) {
+			if(entidades.get(i).movibleActivado)
+				if(!pressed[i][e.getKeyCode()]) {
+					entidades.get(i).keyPressed(e);
+					pressed[i][e.getKeyCode()] = true;
+				}
+		}
+		/*
 		for ( KeyListener ent: entidades){
 			if(!pressed[e.getKeyCode()]){
 				ent.keyPressed(e);
 				pressed[e.getKeyCode()] = true;
 			}
-		}
+		}*/
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		for(int i = 0 ;i< entidades.size();i++) {
+			if(entidades.get(i).movibleActivado)
+				if(pressed[i][e.getKeyCode()]) {
+					entidades.get(i).keyReleased(e);
+					pressed[i][e.getKeyCode()] = false;
+				}
+		}
+		/*
 		for ( KeyListener ent: entidades){
 			if(pressed[e.getKeyCode()]){
 				ent.keyReleased(e);
 				pressed[e.getKeyCode()] = false;
 			}
 			
-		}		
+		}	*/	
 	}
 
 	@Override
@@ -62,9 +78,13 @@ public class ControladorEntidades implements KeyListener, MouseMotionListener, M
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		for ( MouseListener ent: entidades){
-			ent.mouseClicked(e);
+
+		for(int i = 0 ;i< entidades.size();i++) {
+			if(entidades.get(i).movibleActivado) {
+				entidades.get(i).mouseClicked(e);;
+			}
 		}
+		
 	}
 
 	@Override

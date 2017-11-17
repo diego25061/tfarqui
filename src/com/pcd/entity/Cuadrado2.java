@@ -14,7 +14,7 @@ import com.pcd.Movible;
  *
  * @author alumnos
  */
-public class Cuadrado extends Movible{
+public class Cuadrado2 extends Movible{
 
     @Override
     protected void enFrame0() {
